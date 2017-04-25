@@ -51,25 +51,39 @@ class Trend extends Component {
     this.gradientId = `react-trend-vertical-gradient-${this.trendId}`;
   }
 
+  autoDrawLine() {
+    const { autoDrawDuration, autoDrawEasing } = this.props;
+
+    this.lineLength = this.path.getTotalLength();
+
+    const css = generateAutoDrawCss({
+      id: this.trendId,
+      lineLength: this.lineLength,
+      duration: autoDrawDuration,
+      easing: autoDrawEasing,
+    });
+
+    injectStyleTag(css);
+  }
+
   componentDidMount() {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     if (autoDraw) {
-      this.lineLength = this.path.getTotalLength();
-
-      const css = generateAutoDrawCss({
-        id: this.trendId,
-        lineLength: this.lineLength,
-        duration: autoDrawDuration,
-        easing: autoDrawEasing,
-      });
-
-      injectStyleTag(css);
+      this.autoDrawLine.bind(this);
     }
   }
 
   getDelegatedProps() {
     return omit(this.props, Object.keys(propTypes));
+  }
+
+  reDrawLine() {
+    const { autoDrawDuration, autoDrawEasing } = this.props; 
+
+    if (autoDraw) {
+      this.autoDrawLine.bind(this);
+    }
   }
 
   renderGradientDefinition() {
@@ -112,6 +126,7 @@ class Trend extends Component {
       padding,
       radius,
       gradient,
+      autoDraw
     } = this.props;
 
     // We need at least 2 points to draw a graph.
@@ -160,6 +175,7 @@ class Trend extends Component {
         {...this.getDelegatedProps()}
       >
         {gradient && this.renderGradientDefinition()}
+        {autoDraw && this.reDrawLine()}
 
         <path
           ref={(elem) => { this.path = elem; }}
