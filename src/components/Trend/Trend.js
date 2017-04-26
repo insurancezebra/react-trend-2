@@ -188,6 +188,7 @@ class Trend extends Component {
         {gradient && this.renderGradientDefinition()}
 
         <path
+          className="animate"
           ref={(elem) => { this.path = elem; }}
           id={`react-trend-${this.trendId}`}
           d={path}

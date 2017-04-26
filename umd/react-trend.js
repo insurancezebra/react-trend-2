@@ -341,6 +341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }),
 	      gradient && this.renderGradientDefinition(),
 	      _react2.default.createElement('path', {
+	        className: 'animate',
 	        ref: function ref(elem) {
 	          _this3.path = elem;
 	        },
