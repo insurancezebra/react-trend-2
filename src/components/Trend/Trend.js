@@ -175,7 +175,6 @@ class Trend extends Component {
         {...this.getDelegatedProps()}
       >
         {gradient && this.renderGradientDefinition()}
-        {autoDraw && this.reDrawLine()}
 
         <path
           ref={(elem) => { this.path = elem; }}
@@ -192,4 +191,6 @@ class Trend extends Component {
 Trend.propTypes = propTypes;
 Trend.defaultProps = defaultProps;
 
+
+export const reDraw = Trend.reDrawLine();
 export default Trend;
