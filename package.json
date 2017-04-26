@@ -11,7 +11,6 @@
     "umd"
   ],
   "scripts": {
-    "prepublish": "npm run build",
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && npm clean-demo",
     "deploy": "nwb build-demo && gh-pages -d demo/dist",
