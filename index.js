@@ -1,1 +1,0 @@
-import Trend from './src/index.js';
