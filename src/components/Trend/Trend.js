@@ -191,6 +191,4 @@ class Trend extends Component {
 Trend.propTypes = propTypes;
 Trend.defaultProps = defaultProps;
 
-
-export const reDraw = Trend.reDrawLine();
 export default Trend;
