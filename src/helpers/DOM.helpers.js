@@ -66,8 +66,12 @@ export const injectStyleTag = (cssContents) => {
       styleTag.type = 'text/css';
       styleTag.setAttribute('data-react-trend', '');
       head.appendChild(styleTag);
+      styleTag.appendChild(document.createTextNode(cssContents));
     }
   }
-
-  styleTag.appendChild(document.createTextNode(cssContents));
+  else {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    while(styleTag.firstChild) styleTag.removeChild(styleTag.firstChild);
+    styleTag.appendChild(document.createTextNode(cssContents));
+  }
 };

@@ -171,52 +171,55 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _this.trendId = (0, _misc.generateId)();
 	    _this.gradientId = 'react-trend-vertical-gradient-' + _this.trendId;
+	    _this.autoDraw = _this.autoDraw.bind(_this);
 	    return _this;
 	  }
 
-	  Trend.prototype.autoDrawLine = function autoDrawLine() {
+	  Trend.prototype.componentDidMount = function componentDidMount() {
+	    this.autoDraw();
+	  };
+
+	  Trend.prototype.autoDraw = function autoDraw() {
+	    var path = document.querySelector('.trend-line path');
+	    path.classList.add('animate');
+	    if (path.classList.contains('animate')) {
+	      window.setTimeout(function () {
+	        path.classList.remove('animate');
+	      }, 1500);
+	    }
 	    var _props = this.props,
+	        autoDraw = _props.autoDraw,
 	        autoDrawDuration = _props.autoDrawDuration,
 	        autoDrawEasing = _props.autoDrawEasing;
 
 
-	    this.lineLength = this.path.getTotalLength();
+	    if (autoDraw) {
+	      this.lineLength = this.path.getTotalLength();
+	      if (this.newLength) {
+	        this.currLength = this.newLength;
+	      } else {
+	        this.currLength = 0;
+	      }
+	      this.newLength = this.lineLength;
 
-	    var css = (0, _Trend.generateAutoDrawCss)({
-	      id: this.trendId,
-	      lineLength: this.lineLength,
-	      duration: autoDrawDuration,
-	      easing: autoDrawEasing
-	    });
+	      var css = (0, _Trend.generateAutoDrawCss)({
+	        id: this.trendId,
+	        lineLength: this.currLength,
+	        newLength: this.newLength,
+	        duration: autoDrawDuration,
+	        easing: autoDrawEasing
+	      });
 
-	    (0, _DOM.injectStyleTag)(css);
+	      (0, _DOM.injectStyleTag)(css);
+	    }
 	  };
 
-	  Trend.prototype.componentDidMount = function componentDidMount() {
-	    var _props2 = this.props,
-	        autoDraw = _props2.autoDraw,
-	        autoDrawDuration = _props2.autoDrawDuration,
-	        autoDrawEasing = _props2.autoDrawEasing;
-
-
-	    if (autoDraw) {
-	      this.autoDrawLine.bind(this);
-	    }
+	  Trend.prototype.componentWillUpdate = function componentWillUpdate() {
+	    this.autoDraw();
 	  };
 
 	  Trend.prototype.getDelegatedProps = function getDelegatedProps() {
 	    return (0, _utils.omit)(this.props, Object.keys(propTypes));
-	  };
-
-	  Trend.prototype.reDrawLine = function reDrawLine() {
-	    var _props3 = this.props,
-	        autoDrawDuration = _props3.autoDrawDuration,
-	        autoDrawEasing = _props3.autoDrawEasing;
-
-
-	    if (autoDraw) {
-	      this.autoDrawLine.bind(this);
-	    }
 	  };
 
 	  Trend.prototype.renderGradientDefinition = function renderGradientDefinition() {
@@ -230,7 +233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 93
+	          lineNumber: 102
 	        },
 	        __self: this
 	      },
@@ -244,7 +247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 94
+	            lineNumber: 103
 	          },
 	          __self: this
 	        },
@@ -262,7 +265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 102
+	              lineNumber: 111
 	            },
 	            __self: _this2
 	          });
@@ -274,15 +277,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Trend.prototype.render = function render() {
 	    var _this3 = this;
 
-	    var _props4 = this.props,
-	        data = _props4.data,
-	        smooth = _props4.smooth,
-	        width = _props4.width,
-	        height = _props4.height,
-	        padding = _props4.padding,
-	        radius = _props4.radius,
-	        gradient = _props4.gradient,
-	        autoDraw = _props4.autoDraw;
+	    var _props2 = this.props,
+	        data = _props2.data,
+	        smooth = _props2.smooth,
+	        width = _props2.width,
+	        height = _props2.height,
+	        padding = _props2.padding,
+	        radius = _props2.radius,
+	        gradient = _props2.gradient;
 
 	    // We need at least 2 points to draw a graph.
 
@@ -330,7 +332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 171
+	          lineNumber: 179
 	        },
 	        __self: this
 	      }),
@@ -345,7 +347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 179
+	          lineNumber: 187
 	        },
 	        __self: this
 	      })
@@ -475,10 +477,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      styleTag.type = 'text/css';
 	      styleTag.setAttribute('data-react-trend', '');
 	      head.appendChild(styleTag);
+	      styleTag.appendChild(document.createTextNode(cssContents));
 	    }
+	  } else {
+	    var _head = document.head || document.getElementsByTagName('head')[0];
+	    while (styleTag.firstChild) {
+	      styleTag.removeChild(styleTag.firstChild);
+	    }styleTag.appendChild(document.createTextNode(cssContents));
 	  }
-
-	  styleTag.appendChild(document.createTextNode(cssContents));
 	};
 
 /***/ },
@@ -655,12 +661,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var generateAutoDrawCss = exports.generateAutoDrawCss = function generateAutoDrawCss(_ref2) {
 	  var id = _ref2.id,
 	      lineLength = _ref2.lineLength,
+	      newLength = _ref2.newLength,
 	      duration = _ref2.duration,
 	      easing = _ref2.easing;
 
 	  // We do the animation using the dash array/offset trick
 	  // https://css-tricks.com/svg-line-animation-works/
-	  var autodrawKeyframeAnimation = '\n    @keyframes react-trend-autodraw-' + id + ' {\n      0% {\n        stroke-dasharray: ' + lineLength + ';\n        stroke-dashoffset: ' + lineLength + '\n      }\n      100% {\n        stroke-dasharray: ' + lineLength + ';\n        stroke-dashoffset: 0;\n      }\n      100% {\n        stroke-dashoffset: \'\';\n        stroke-dasharray: \'\';\n      }\n    }\n  ';
+	  var autodrawKeyframeAnimation = '\n    @keyframes react-trend-autodraw-' + id + ' {\n      0% {\n        stroke-dasharray: ' + (newLength + lineLength) + ';\n        stroke-dashoffset: ' + (newLength - 20) + '\n      }\n      100% {\n        stroke-dasharray: ' + (newLength + lineLength) + ';\n        stroke-dashoffset: 0;\n      }\n      100% {\n        stroke-dashoffset: \'\';\n        stroke-dasharray: \'\';\n      }\n    }\n  ';
 
 	  // One unfortunate side-effect of the auto-draw is that the line is
 	  // actually 1 big dash, the same length as the line itself. If the
@@ -669,7 +676,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // properties once the auto-draw is completed.
 	  var cleanupKeyframeAnimation = '\n    @keyframes react-trend-autodraw-cleanup-' + id + ' {\n      to {\n        stroke-dasharray: \'\';\n        stroke-dashoffset: \'\';\n      }\n    }\n  ';
 
-	  return '\n    ' + autodrawKeyframeAnimation + '\n\n    ' + cleanupKeyframeAnimation + '\n\n    #react-trend-' + id + ' {\n      animation:\n        react-trend-autodraw-' + id + ' ' + duration + 'ms ' + easing + ',\n        react-trend-autodraw-cleanup-' + id + ' 1ms ' + duration + 'ms\n      ;\n    }\n  ';
+	  return '\n    ' + autodrawKeyframeAnimation + '\n\n    ' + cleanupKeyframeAnimation + '\n\n    #react-trend-' + id + '.animate {\n      animation:\n        react-trend-autodraw-' + id + ' ' + duration + 'ms ' + easing + ',\n        react-trend-autodraw-cleanup-' + id + ' 1ms ' + duration + 'ms\n      ;\n    }\n  ';
 	};
 
 /***/ }

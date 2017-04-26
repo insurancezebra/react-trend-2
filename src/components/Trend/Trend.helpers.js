@@ -43,17 +43,17 @@ export const normalizeDataset = (data, { minX, maxX, minY, maxY }) => {
   return normalizedData;
 };
 
-export const generateAutoDrawCss = ({ id, lineLength, duration, easing }) => {
+export const generateAutoDrawCss = ({ id, lineLength, newLength, duration, easing }) => {
   // We do the animation using the dash array/offset trick
   // https://css-tricks.com/svg-line-animation-works/
   const autodrawKeyframeAnimation = `
     @keyframes react-trend-autodraw-${id} {
       0% {
-        stroke-dasharray: ${lineLength};
-        stroke-dashoffset: ${lineLength}
+        stroke-dasharray: ${newLength + lineLength};
+        stroke-dashoffset: ${newLength - 20}
       }
       100% {
-        stroke-dasharray: ${lineLength};
+        stroke-dasharray: ${newLength + lineLength};
         stroke-dashoffset: 0;
       }
       100% {
@@ -82,7 +82,7 @@ export const generateAutoDrawCss = ({ id, lineLength, duration, easing }) => {
 
     ${cleanupKeyframeAnimation}
 
-    #react-trend-${id} {
+    #react-trend-${id}.animate {
       animation:
         react-trend-autodraw-${id} ${duration}ms ${easing},
         react-trend-autodraw-cleanup-${id} 1ms ${duration}ms

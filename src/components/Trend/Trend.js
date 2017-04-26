@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-
 import { omit } from '../../utils';
 import {
   buildSmoothPath,
@@ -49,41 +48,51 @@ class Trend extends Component {
     // animations.
     this.trendId = generateId();
     this.gradientId = `react-trend-vertical-gradient-${this.trendId}`;
-  }
-
-  autoDrawLine() {
-    const { autoDrawDuration, autoDrawEasing } = this.props;
-
-    this.lineLength = this.path.getTotalLength();
-
-    const css = generateAutoDrawCss({
-      id: this.trendId,
-      lineLength: this.lineLength,
-      duration: autoDrawDuration,
-      easing: autoDrawEasing,
-    });
-
-    injectStyleTag(css);
+    this.autoDraw = this.autoDraw.bind(this);
   }
 
   componentDidMount() {
+    this.autoDraw();
+  }
+
+  autoDraw() {
+    const path = document.querySelector('.trend-line path');
+    path.classList.add('animate');
+    if (path.classList.contains('animate')) {
+      window.setTimeout(() => {
+        path.classList.remove('animate');
+      }, 1500);
+    }
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     if (autoDraw) {
-      this.autoDrawLine.bind(this);
+      this.lineLength = this.path.getTotalLength();
+      if (this.newLength) {
+        this.currLength = this.newLength;
+      }
+      else {
+        this.currLength = 0;
+      }
+      this.newLength = this.lineLength;
+
+      const css = generateAutoDrawCss({
+        id: this.trendId,
+        lineLength: this.currLength,
+        newLength: this.newLength,
+        duration: autoDrawDuration,
+        easing: autoDrawEasing,
+      });
+
+      injectStyleTag(css);
     }
+  }
+
+  componentWillUpdate() {
+    this.autoDraw();
   }
 
   getDelegatedProps() {
     return omit(this.props, Object.keys(propTypes));
-  }
-
-  reDrawLine() {
-    const { autoDrawDuration, autoDrawEasing } = this.props; 
-
-    if (autoDraw) {
-      this.autoDrawLine.bind(this);
-    }
   }
 
   renderGradientDefinition() {
@@ -126,7 +135,6 @@ class Trend extends Component {
       padding,
       radius,
       gradient,
-      autoDraw
     } = this.props;
 
     // We need at least 2 points to draw a graph.
