@@ -56,14 +56,17 @@ class Trend extends Component {
   }
 
   autoDraw() {
+    const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
+
     const path = document.querySelector('.trend-line path');
     path.classList.add('animate');
+    // remove animate class after animation duration
+    // so it will re-trigger itself each time
     if (path.classList.contains('animate')) {
       window.setTimeout(() => {
         path.classList.remove('animate');
-      }, 1500);
+      }, autoDrawDuration);
     }
-    const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     if (autoDraw) {
       this.lineLength = this.path.getTotalLength();

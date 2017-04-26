@@ -180,18 +180,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.autoDraw = function autoDraw() {
-	    var path = document.querySelector('.trend-line path');
-	    path.classList.add('animate');
-	    if (path.classList.contains('animate')) {
-	      window.setTimeout(function () {
-	        path.classList.remove('animate');
-	      }, 1500);
-	    }
 	    var _props = this.props,
 	        autoDraw = _props.autoDraw,
 	        autoDrawDuration = _props.autoDrawDuration,
 	        autoDrawEasing = _props.autoDrawEasing;
 
+
+	    var path = document.querySelector('.trend-line path');
+	    path.classList.add('animate');
+	    // remove animate class after animation duration
+	    // so it will re-trigger itself each time
+	    if (path.classList.contains('animate')) {
+	      window.setTimeout(function () {
+	        path.classList.remove('animate');
+	      }, autoDrawDuration);
+	    }
 
 	    if (autoDraw) {
 	      this.lineLength = this.path.getTotalLength();
@@ -233,7 +236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 102
+	          lineNumber: 105
 	        },
 	        __self: this
 	      },
@@ -247,7 +250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 103
+	            lineNumber: 106
 	          },
 	          __self: this
 	        },
@@ -265,7 +268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 111
+	              lineNumber: 114
 	            },
 	            __self: _this2
 	          });
@@ -332,7 +335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 179
+	          lineNumber: 182
 	        },
 	        __self: this
 	      }),
@@ -347,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 187
+	          lineNumber: 190
 	        },
 	        __self: this
 	      })
