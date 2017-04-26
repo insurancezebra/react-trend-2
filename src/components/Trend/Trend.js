@@ -58,6 +58,29 @@ class Trend extends Component {
   autoDraw(first) {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
+    function draw() {
+      if (autoDraw) {
+        this.lineLength = this.path.getTotalLength();
+        if (this.newLength) {
+          this.currLength = this.newLength;
+        }
+        else {
+          this.currLength = 0;
+        }
+        this.newLength = this.lineLength;
+
+        const css = generateAutoDrawCss({
+          id: this.trendId,
+          lineLength: this.currLength,
+          newLength: this.newLength,
+          duration: autoDrawDuration,
+          easing: autoDrawEasing,
+        });
+
+        injectStyleTag(css);
+      }
+    }
+
     const path = document.querySelector('.trend-line path');
     path.classList.add('animate');
     // remove animate class after animation duration
@@ -68,31 +91,14 @@ class Trend extends Component {
           path.classList.remove('animate');
         }, autoDrawDuration);
       }
+      draw();
     }
     else {
       path.classList.remove('animate');
       path.classList.add('animate');
-    }
-
-    if (autoDraw) {
-      this.lineLength = this.path.getTotalLength();
-      if (this.newLength) {
-        this.currLength = this.newLength;
-      }
-      else {
-        this.currLength = 0;
-      }
-      this.newLength = this.lineLength;
-
-      const css = generateAutoDrawCss({
-        id: this.trendId,
-        lineLength: this.currLength,
-        newLength: this.newLength,
-        duration: autoDrawDuration,
-        easing: autoDrawEasing,
-      });
-
-      injectStyleTag(css);
+      window.setTimeout(() => {
+        draw();
+      }, autoDrawDuration);
     }
   }
 

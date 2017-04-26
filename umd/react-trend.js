@@ -186,6 +186,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	        autoDrawEasing = _props.autoDrawEasing;
 
 
+	    function draw() {
+	      if (autoDraw) {
+	        this.lineLength = this.path.getTotalLength();
+	        if (this.newLength) {
+	          this.currLength = this.newLength;
+	        } else {
+	          this.currLength = 0;
+	        }
+	        this.newLength = this.lineLength;
+
+	        var css = (0, _Trend.generateAutoDrawCss)({
+	          id: this.trendId,
+	          lineLength: this.currLength,
+	          newLength: this.newLength,
+	          duration: autoDrawDuration,
+	          easing: autoDrawEasing
+	        });
+
+	        (0, _DOM.injectStyleTag)(css);
+	      }
+	    }
+
 	    var path = document.querySelector('.trend-line path');
 	    path.classList.add('animate');
 	    // remove animate class after animation duration
@@ -196,29 +218,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	          path.classList.remove('animate');
 	        }, autoDrawDuration);
 	      }
+	      draw();
 	    } else {
 	      path.classList.remove('animate');
 	      path.classList.add('animate');
-	    }
-
-	    if (autoDraw) {
-	      this.lineLength = this.path.getTotalLength();
-	      if (this.newLength) {
-	        this.currLength = this.newLength;
-	      } else {
-	        this.currLength = 0;
-	      }
-	      this.newLength = this.lineLength;
-
-	      var css = (0, _Trend.generateAutoDrawCss)({
-	        id: this.trendId,
-	        lineLength: this.currLength,
-	        newLength: this.newLength,
-	        duration: autoDrawDuration,
-	        easing: autoDrawEasing
-	      });
-
-	      (0, _DOM.injectStyleTag)(css);
+	      window.setTimeout(function () {
+	        draw();
+	      }, autoDrawDuration);
 	    }
 	  };
 
@@ -241,7 +247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 111
+	          lineNumber: 117
 	        },
 	        __self: this
 	      },
@@ -255,7 +261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 112
+	            lineNumber: 118
 	          },
 	          __self: this
 	        },
@@ -273,7 +279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 120
+	              lineNumber: 126
 	            },
 	            __self: _this2
 	          });
@@ -340,7 +346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 188
+	          lineNumber: 194
 	        },
 	        __self: this
 	      }),
@@ -355,7 +361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 196
+	          lineNumber: 202
 	        },
 	        __self: this
 	      })
