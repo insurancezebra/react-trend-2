@@ -52,34 +52,13 @@ class Trend extends Component {
   }
 
   componentDidMount() {
-    this.autoDraw('first');
+    const path = document.querySelector('.trend-line path');
+    path.classList.remove('animate');
+    this.autoDraw();
   }
 
   autoDraw(first) {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
-
-    function draw() {
-      if (autoDraw) {
-        this.lineLength = this.path.getTotalLength();
-        if (this.newLength) {
-          this.currLength = this.newLength;
-        }
-        else {
-          this.currLength = 0;
-        }
-        this.newLength = this.lineLength;
-
-        const css = generateAutoDrawCss({
-          id: this.trendId,
-          lineLength: this.currLength,
-          newLength: this.newLength,
-          duration: autoDrawDuration,
-          easing: autoDrawEasing,
-        });
-
-        injectStyleTag(css);
-      }
-    }
 
     const path = document.querySelector('.trend-line path');
     path.classList.add('animate');
@@ -91,14 +70,27 @@ class Trend extends Component {
           path.classList.remove('animate');
         }, autoDrawDuration);
       }
-      draw();
     }
-    else {
-      path.classList.remove('animate');
-      path.classList.add('animate');
-      window.setTimeout(() => {
-        draw();
-      }, autoDrawDuration);
+
+    if (autoDraw) {
+      this.lineLength = this.path.getTotalLength();
+      if (this.newLength) {
+        this.currLength = this.newLength;
+      }
+      else {
+        this.currLength = 0;
+      }
+      this.newLength = this.lineLength;
+
+      const css = generateAutoDrawCss({
+        id: this.trendId,
+        lineLength: this.currLength,
+        newLength: this.newLength,
+        duration: autoDrawDuration,
+        easing: autoDrawEasing,
+      });
+
+      injectStyleTag(css);
     }
   }
 
@@ -200,6 +192,7 @@ class Trend extends Component {
         {gradient && this.renderGradientDefinition()}
 
         <path
+          className="animate"
           ref={(elem) => { this.path = elem; }}
           id={`react-trend-${this.trendId}`}
           d={path}
