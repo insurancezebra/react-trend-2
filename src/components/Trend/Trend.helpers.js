@@ -77,6 +77,8 @@ export const generateAutoDrawCss = ({ id, lineLength, newLength, duration, easin
     }
   `;
 
+  // adding animate class so we can trigger the animation
+  // style when needed
   return `
     ${autodrawKeyframeAnimation}
 

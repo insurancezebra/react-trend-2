@@ -70,6 +70,8 @@ export const injectStyleTag = (cssContents) => {
     }
   }
   else {
+    // remove the contents of the style tag so we can append
+    // the updated css
     const head = document.head || document.getElementsByTagName('head')[0];
     while(styleTag.firstChild) styleTag.removeChild(styleTag.firstChild);
     styleTag.appendChild(document.createTextNode(cssContents));

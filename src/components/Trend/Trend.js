@@ -57,6 +57,8 @@ class Trend extends Component {
     this.autoDraw();
   }
 
+  // moved this functionality out of componentDidMount
+  // so we can access it from anywhere
   autoDraw(first) {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
@@ -74,9 +76,12 @@ class Trend extends Component {
 
     if (autoDraw) {
       this.lineLength = this.path.getTotalLength();
+      // if we already have a "new" value, that means it is no longer
+      // "new" but the "current" value
       if (this.newLength) {
         this.currLength = this.newLength;
       }
+      // otherwise, it's the first time around and we don't have a value
       else {
         this.currLength = 0;
       }

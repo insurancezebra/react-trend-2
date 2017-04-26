@@ -9,6 +9,10 @@
 <br>
 <br>
 <br>
+This is forked from <a href="https://github.com/unsplash/react-trend">Unsplash</a> to add in the ability to update the trendline and render the animation each time it is updated
+<br>
+<br>
+<br>
 Graphing tools are often complex, abstract, and heavy. They require domain-specific knowledge, and a significant time investment.
 
 While building rich data visualizations for an analytics app, this is a necessary cost. But what if you just need a spark line that shows a trend?

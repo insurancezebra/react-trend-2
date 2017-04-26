@@ -181,6 +181,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.autoDraw();
 	  };
 
+	  // moved this functionality out of componentDidMount
+	  // so we can access it from anywhere
+
+
 	  Trend.prototype.autoDraw = function autoDraw(first) {
 	    var _props = this.props,
 	        autoDraw = _props.autoDraw,
@@ -202,11 +206,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (autoDraw) {
 	      this.lineLength = this.path.getTotalLength();
+	      // if we already have a "new" value, that means it is no longer
+	      // "new" but the "current" value
 	      if (this.newLength) {
 	        this.currLength = this.newLength;
-	      } else {
-	        this.currLength = 0;
 	      }
+	      // otherwise, it's the first time around and we don't have a value
+	      else {
+	          this.currLength = 0;
+	        }
 	      this.newLength = this.lineLength;
 
 	      var css = (0, _Trend.generateAutoDrawCss)({
@@ -240,7 +248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 109
+	          lineNumber: 114
 	        },
 	        __self: this
 	      },
@@ -254,7 +262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 110
+	            lineNumber: 115
 	          },
 	          __self: this
 	        },
@@ -272,7 +280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 118
+	              lineNumber: 123
 	            },
 	            __self: _this2
 	          });
@@ -339,7 +347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 186
+	          lineNumber: 191
 	        },
 	        __self: this
 	      }),
@@ -355,7 +363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 194
+	          lineNumber: 199
 	        },
 	        __self: this
 	      })
@@ -488,6 +496,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      styleTag.appendChild(document.createTextNode(cssContents));
 	    }
 	  } else {
+	    // remove the contents of the style tag so we can append
+	    // the updated css
 	    var _head = document.head || document.getElementsByTagName('head')[0];
 	    while (styleTag.firstChild) {
 	      styleTag.removeChild(styleTag.firstChild);
@@ -684,6 +694,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // properties once the auto-draw is completed.
 	  var cleanupKeyframeAnimation = '\n    @keyframes react-trend-autodraw-cleanup-' + id + ' {\n      to {\n        stroke-dasharray: \'\';\n        stroke-dashoffset: \'\';\n      }\n    }\n  ';
 
+	  // adding animate class so we can trigger the animation
+	  // style when needed
 	  return '\n    ' + autodrawKeyframeAnimation + '\n\n    ' + cleanupKeyframeAnimation + '\n\n    #react-trend-' + id + '.animate {\n      animation:\n        react-trend-autodraw-' + id + ' ' + duration + 'ms ' + easing + ',\n        react-trend-autodraw-cleanup-' + id + ' 1ms ' + duration + 'ms\n      ;\n    }\n  ';
 	};
 
