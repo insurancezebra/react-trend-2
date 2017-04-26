@@ -52,20 +52,22 @@ class Trend extends Component {
   }
 
   componentDidMount() {
-    this.autoDraw();
+    this.autoDraw('first');
   }
 
-  autoDraw() {
+  autoDraw(first) {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     const path = document.querySelector('.trend-line path');
     path.classList.add('animate');
     // remove animate class after animation duration
     // so it will re-trigger itself each time
-    if (path.classList.contains('animate')) {
-      window.setTimeout(() => {
-        path.classList.remove('animate');
-      }, autoDrawDuration);
+    if (!first) {
+      if (path.classList.contains('animate')) {
+        window.setTimeout(() => {
+          path.classList.remove('animate');
+        }, autoDrawDuration);
+      }
     }
 
     if (autoDraw) {
@@ -188,7 +190,6 @@ class Trend extends Component {
         {gradient && this.renderGradientDefinition()}
 
         <path
-          className="animate"
           ref={(elem) => { this.path = elem; }}
           id={`react-trend-${this.trendId}`}
           d={path}

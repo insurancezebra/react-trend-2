@@ -176,10 +176,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  Trend.prototype.componentDidMount = function componentDidMount() {
-	    this.autoDraw();
+	    this.autoDraw('first');
 	  };
 
-	  Trend.prototype.autoDraw = function autoDraw() {
+	  Trend.prototype.autoDraw = function autoDraw(first) {
 	    var _props = this.props,
 	        autoDraw = _props.autoDraw,
 	        autoDrawDuration = _props.autoDrawDuration,
@@ -190,10 +190,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    path.classList.add('animate');
 	    // remove animate class after animation duration
 	    // so it will re-trigger itself each time
-	    if (path.classList.contains('animate')) {
-	      window.setTimeout(function () {
-	        path.classList.remove('animate');
-	      }, autoDrawDuration);
+	    if (!first) {
+	      if (path.classList.contains('animate')) {
+	        window.setTimeout(function () {
+	          path.classList.remove('animate');
+	        }, autoDrawDuration);
+	      }
 	    }
 
 	    if (autoDraw) {
@@ -236,7 +238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 105
+	          lineNumber: 107
 	        },
 	        __self: this
 	      },
@@ -250,7 +252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 106
+	            lineNumber: 108
 	          },
 	          __self: this
 	        },
@@ -268,7 +270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 114
+	              lineNumber: 116
 	            },
 	            __self: _this2
 	          });
@@ -335,13 +337,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 182
+	          lineNumber: 184
 	        },
 	        __self: this
 	      }),
 	      gradient && this.renderGradientDefinition(),
 	      _react2.default.createElement('path', {
-	        className: 'animate',
 	        ref: function ref(elem) {
 	          _this3.path = elem;
 	        },
@@ -351,7 +352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 190
+	          lineNumber: 192
 	        },
 	        __self: this
 	      })
