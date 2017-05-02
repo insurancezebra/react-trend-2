@@ -42,6 +42,9 @@ const defaultProps = {
 class Trend extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentClass: 'animate'
+    };
 
     // Generate a random ID. This is important for distinguishing between
     // Trend components on a page, so that they can have different keyframe
@@ -60,17 +63,14 @@ class Trend extends Component {
   autoDraw(first) {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
-    const path = document.querySelector('.trend-line path');
-    path.classList.add('animate');
-    // remove animate class after animation duration
+    // const path = document.querySelector('.trend-line path');
+    // path.classList.add('animate');
+    // // remove animate class after animation duration
     // so it will re-trigger itself each time
-    if (!first) {
-      if (path.classList.contains('animate')) {
+    this.setState({currentClass: 'animate'})
         window.setTimeout(() => {
-          path.classList.remove('animate');
+          this.setState({ currentClass: '' });
         }, autoDrawDuration);
-      }
-    }
 
     if (autoDraw) {
       this.lineLength = this.path.getTotalLength();
@@ -171,7 +171,6 @@ class Trend extends Component {
     const viewBoxHeight = height || 75;
     const svgWidth = width || '100%';
     const svgHeight = height || '25%';
-
     const normalizedValues = normalizeDataset(plainValues, {
       minX: padding,
       maxX: viewBoxWidth - padding,
@@ -195,7 +194,7 @@ class Trend extends Component {
         {gradient && this.renderGradientDefinition()}
 
         <path
-          className="animate"
+          className={this.state.currentClass}
           ref={(elem) => { this.path = elem; }}
           id={`react-trend-${this.trendId}`}
           d={path}

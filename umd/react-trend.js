@@ -164,11 +164,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Trend(props) {
 	    _classCallCheck(this, Trend);
 
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+	    _this.state = {
+	      currentClass: 'animate'
+	    };
+
 	    // Generate a random ID. This is important for distinguishing between
 	    // Trend components on a page, so that they can have different keyframe
 	    // animations.
-	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
 	    _this.trendId = (0, _misc.generateId)();
 	    _this.gradientId = 'react-trend-vertical-gradient-' + _this.trendId;
 	    _this.autoDraw = _this.autoDraw.bind(_this);
@@ -184,23 +188,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Trend.prototype.autoDraw = function autoDraw(first) {
+	    var _this2 = this;
+
 	    var _props = this.props,
 	        autoDraw = _props.autoDraw,
 	        autoDrawDuration = _props.autoDrawDuration,
 	        autoDrawEasing = _props.autoDrawEasing;
 
-
-	    var path = document.querySelector('.trend-line path');
-	    path.classList.add('animate');
-	    // remove animate class after animation duration
+	    // const path = document.querySelector('.trend-line path');
+	    // path.classList.add('animate');
+	    // // remove animate class after animation duration
 	    // so it will re-trigger itself each time
-	    if (!first) {
-	      if (path.classList.contains('animate')) {
-	        window.setTimeout(function () {
-	          path.classList.remove('animate');
-	        }, autoDrawDuration);
-	      }
-	    }
+
+	    this.setState({ currentClass: 'animate' });
+	    window.setTimeout(function () {
+	      _this2.setState({ currentClass: '' });
+	    }, autoDrawDuration);
 
 	    if (autoDraw) {
 	      this.lineLength = this.path.getTotalLength();
@@ -236,7 +239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.renderGradientDefinition = function renderGradientDefinition() {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    var gradient = this.props.gradient;
 
@@ -280,7 +283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              fileName: _jsxFileName,
 	              lineNumber: 121
 	            },
-	            __self: _this2
+	            __self: _this3
 	          });
 	        })
 	      )
@@ -288,7 +291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.render = function render() {
-	    var _this3 = this;
+	    var _this4 = this;
 
 	    var _props2 = this.props,
 	        data = _props2.data,
@@ -324,7 +327,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var viewBoxHeight = height || 75;
 	    var svgWidth = width || '100%';
 	    var svgHeight = height || '25%';
-
 	    var normalizedValues = (0, _Trend.normalizeDataset)(plainValues, {
 	      minX: padding,
 	      maxX: viewBoxWidth - padding,
@@ -345,15 +347,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 189
+	          lineNumber: 188
 	        },
 	        __self: this
 	      }),
 	      gradient && this.renderGradientDefinition(),
 	      _react2.default.createElement('path', {
-	        className: 'animate',
+	        className: this.state.currentClass,
 	        ref: function ref(elem) {
-	          _this3.path = elem;
+	          _this4.path = elem;
 	        },
 	        id: 'react-trend-' + this.trendId,
 	        d: path,
@@ -361,7 +363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 197
+	          lineNumber: 196
 	        },
 	        __self: this
 	      })
