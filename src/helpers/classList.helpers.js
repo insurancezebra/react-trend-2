@@ -39,18 +39,4 @@
             this.remove(oldName), this.add(newName);
         }
     };
-
-    // IE8/9, Safari
-    if (!('classList' in Element.prototype)) {
-        Object.defineProperty(Element.prototype, 'classList', {
-            get: function() {
-                return new ClassList(this);
-            }
-        });
-    }
-
-    // replace() support for others
-    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
-        DOMTokenList.prototype.replace = ClassList.prototype.replace;
-    }
 })();
