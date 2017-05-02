@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import '../../helpers/classList.helpers.js';
 import { omit } from '../../utils';
 import {
   buildSmoothPath,
@@ -52,8 +53,6 @@ class Trend extends Component {
   }
 
   componentDidMount() {
-    const path = document.querySelector('.trend-line path');
-    path.setAttribute('class', 'trend-line');
     this.autoDraw();
   }
 
@@ -63,13 +62,13 @@ class Trend extends Component {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     const path = document.querySelector('.trend-line path');
-    path.setAttribute('class', 'trend-line animate');
+    path.classList.add('animate');
     // remove animate class after animation duration
     // so it will re-trigger itself each time
     if (!first) {
-      if (path.getAttribute('class') === 'trend-line animate') {
+      if (path.classList.contains('animate')) {
         window.setTimeout(() => {
-          path.setAttribute('class', 'trend-line');
+          path.classList.remove('animate');
         }, autoDrawDuration);
       }
     }
