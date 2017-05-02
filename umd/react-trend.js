@@ -193,7 +193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	    var path = document.querySelector('.trend-line path');
-	    path.className += ' animate';
+	    path.className = 'animate';
 	    // remove animate class after animation duration
 	    // so it will re-trigger itself each time
 	    if (!first) {
