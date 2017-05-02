@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import '../../helpers/classList.helpers.js';
 import { omit } from '../../utils';
 import {
   buildSmoothPath,

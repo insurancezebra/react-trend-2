@@ -115,17 +115,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(5);
+	var _utils = __webpack_require__(5);
 
-	var _utils = __webpack_require__(6);
+	var _DOM = __webpack_require__(6);
 
-	var _DOM = __webpack_require__(7);
+	var _math = __webpack_require__(7);
 
-	var _math = __webpack_require__(8);
+	var _misc = __webpack_require__(8);
 
-	var _misc = __webpack_require__(9);
-
-	var _Trend = __webpack_require__(10);
+	var _Trend = __webpack_require__(9);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -248,7 +246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 113
+	          lineNumber: 112
 	        },
 	        __self: this
 	      },
@@ -262,7 +260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 114
+	            lineNumber: 113
 	          },
 	          __self: this
 	        },
@@ -280,7 +278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 122
+	              lineNumber: 121
 	            },
 	            __self: _this2
 	          });
@@ -347,7 +345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 190
+	          lineNumber: 189
 	        },
 	        __self: this
 	      }),
@@ -363,7 +361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 198
+	          lineNumber: 197
 	        },
 	        __self: this
 	      })
@@ -386,54 +384,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	;(function () {
-	    // helpers
-	    var regExp = function regExp(name) {
-	        return new RegExp('(^| )' + name + '( |$)');
-	    };
-	    var forEach = function forEach(list, fn, scope) {
-	        for (var i = 0; i < list.length; i++) {
-	            fn.call(scope, list[i]);
-	        }
-	    };
-
-	    // class list object with basic methods
-	    function ClassList(element) {
-	        this.element = element;
-	    }
-
-	    ClassList.prototype = {
-	        add: function add() {
-	            forEach(arguments, function (name) {
-	                if (!this.contains(name)) {
-	                    this.element.className += ' ' + name;
-	                }
-	            }, this);
-	        },
-	        remove: function remove() {
-	            forEach(arguments, function (name) {
-	                this.element.className = this.element.className.replace(regExp(name), '');
-	            }, this);
-	        },
-	        toggle: function toggle(name) {
-	            return this.contains(name) ? (this.remove(name), false) : (this.add(name), true);
-	        },
-	        contains: function contains(name) {
-	            return regExp(name).test(this.element.className);
-	        },
-	        // bonus..
-	        replace: function replace(oldName, newName) {
-	            this.remove(oldName), this.add(newName);
-	        }
-	    };
-	})();
-
-/***/ },
-/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -467,7 +417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -475,7 +425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.injectStyleTag = exports.buildSmoothPath = exports.buildLinearPath = undefined;
 
-	var _math = __webpack_require__(8);
+	var _math = __webpack_require__(7);
 
 	var buildLinearPath = exports.buildLinearPath = function buildLinearPath(data) {
 	  return data.reduce(function (path, _ref, index) {
@@ -554,7 +504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -652,7 +602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -664,7 +614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -672,7 +622,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.generateAutoDrawCss = exports.normalizeDataset = undefined;
 
-	var _math = __webpack_require__(8);
+	var _math = __webpack_require__(7);
 
 	var normalizeDataset = exports.normalizeDataset = function normalizeDataset(data, _ref) {
 	  var minX = _ref.minX,
