@@ -97,8 +97,10 @@ class Trend extends Component {
     }
   }
 
-  componentWillUpdate() {
-    this.autoDraw();
+  componentWillReceiveProps(nextProps, nextState) {
+    // if(nextState.currentClass !== this.currentClass){
+        this.autoDraw();
+    // }
   }
 
   getDelegatedProps() {
