@@ -109,7 +109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _jsxFileName = '/Users/carynligon/TestProjects/react-trend-update/src/components/Trend/Trend.js';
+	var _jsxFileName = '/Users/carynligon/Projects/react-trend-2/src/components/Trend/Trend.js';
 
 	var _react = __webpack_require__(4);
 
@@ -177,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Trend.prototype.componentDidMount = function componentDidMount() {
 	    var path = document.querySelector('.trend-line path');
-	    path.classList.remove('animate');
+	    path.className = path.className.replace(/\banimate\b/, '');
 	    this.autoDraw();
 	  };
 
@@ -193,13 +193,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	    var path = document.querySelector('.trend-line path');
-	    path.classList.add('animate');
+	    path.className += ' animate';
 	    // remove animate class after animation duration
 	    // so it will re-trigger itself each time
 	    if (!first) {
-	      if (path.classList.contains('animate')) {
+	      if (path.className.indexOf('animate') > 0) {
 	        window.setTimeout(function () {
-	          path.classList.remove('animate');
+	          path.className = path.className.replace(/\banimate\b/, '');
 	        }, autoDrawDuration);
 	      }
 	    }
