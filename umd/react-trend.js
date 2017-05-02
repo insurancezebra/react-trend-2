@@ -197,7 +197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // remove animate class after animation duration
 	    // so it will re-trigger itself each time
 	    if (!first) {
-	      if (path.className.indexOf('animate') > 0) {
+	      if (path.getAttribute('class') === 'trend-line animate') {
 	        window.setTimeout(function () {
 	          path.setAttribute('class', 'trend-line');
 	        }, autoDrawDuration);
