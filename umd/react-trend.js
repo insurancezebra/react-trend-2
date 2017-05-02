@@ -115,17 +115,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(5);
+	var _utils = __webpack_require__(5);
 
-	var _utils = __webpack_require__(6);
+	var _DOM = __webpack_require__(6);
 
-	var _DOM = __webpack_require__(7);
+	var _math = __webpack_require__(7);
 
-	var _math = __webpack_require__(8);
+	var _misc = __webpack_require__(8);
 
-	var _misc = __webpack_require__(9);
-
-	var _Trend = __webpack_require__(10);
+	var _Trend = __webpack_require__(9);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -134,6 +132,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(10);
+
 
 	var propTypes = {
 	  data: _react.PropTypes.arrayOf(_react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.shape({
@@ -388,68 +389,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 5 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	;(function () {
-	    // helpers
-	    var regExp = function regExp(name) {
-	        return new RegExp('(^| )' + name + '( |$)');
-	    };
-	    var forEach = function forEach(list, fn, scope) {
-	        for (var i = 0; i < list.length; i++) {
-	            fn.call(scope, list[i]);
-	        }
-	    };
-
-	    // class list object with basic methods
-	    function ClassList(element) {
-	        this.element = element;
-	    }
-
-	    ClassList.prototype = {
-	        add: function add() {
-	            forEach(arguments, function (name) {
-	                if (!this.contains(name)) {
-	                    this.element.className += ' ' + name;
-	                }
-	            }, this);
-	        },
-	        remove: function remove() {
-	            forEach(arguments, function (name) {
-	                this.element.className = this.element.className.replace(regExp(name), '');
-	            }, this);
-	        },
-	        toggle: function toggle(name) {
-	            return this.contains(name) ? (this.remove(name), false) : (this.add(name), true);
-	        },
-	        contains: function contains(name) {
-	            return regExp(name).test(this.element.className);
-	        },
-	        // bonus..
-	        replace: function replace(oldName, newName) {
-	            this.remove(oldName), this.add(newName);
-	        }
-	    };
-
-	    // IE8/9, Safari
-	    if (!('classList' in Element.prototype)) {
-	        Object.defineProperty(Element.prototype, 'classList', {
-	            get: function get() {
-	                return new ClassList(this);
-	            }
-	        });
-	    }
-
-	    // replace() support for others
-	    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
-	        DOMTokenList.prototype.replace = ClassList.prototype.replace;
-	    }
-	})();
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
 	"use strict";
 
 	exports.__esModule = true;
@@ -481,7 +420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -489,7 +428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.injectStyleTag = exports.buildSmoothPath = exports.buildLinearPath = undefined;
 
-	var _math = __webpack_require__(8);
+	var _math = __webpack_require__(7);
 
 	var buildLinearPath = exports.buildLinearPath = function buildLinearPath(data) {
 	  return data.reduce(function (path, _ref, index) {
@@ -568,7 +507,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -666,7 +605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -678,7 +617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -686,7 +625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.generateAutoDrawCss = exports.normalizeDataset = undefined;
 
-	var _math = __webpack_require__(8);
+	var _math = __webpack_require__(7);
 
 	var normalizeDataset = exports.normalizeDataset = function normalizeDataset(data, _ref) {
 	  var minX = _ref.minX,
@@ -760,6 +699,68 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // style when needed
 	  return '\n    ' + autodrawKeyframeAnimation + '\n\n    ' + cleanupKeyframeAnimation + '\n\n    #react-trend-' + id + '.animate {\n      animation:\n        react-trend-autodraw-' + id + ' ' + duration + 'ms ' + easing + ',\n        react-trend-autodraw-cleanup-' + id + ' 1ms ' + duration + 'ms\n      ;\n    }\n  ';
 	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	;(function () {
+	    // helpers
+	    var regExp = function regExp(name) {
+	        return new RegExp('(^| )' + name + '( |$)');
+	    };
+	    var forEach = function forEach(list, fn, scope) {
+	        for (var i = 0; i < list.length; i++) {
+	            fn.call(scope, list[i]);
+	        }
+	    };
+
+	    // class list object with basic methods
+	    function ClassList(element) {
+	        this.element = element;
+	    }
+
+	    ClassList.prototype = {
+	        add: function add() {
+	            forEach(arguments, function (name) {
+	                if (!this.contains(name)) {
+	                    this.element.className += ' ' + name;
+	                }
+	            }, this);
+	        },
+	        remove: function remove() {
+	            forEach(arguments, function (name) {
+	                this.element.className = this.element.className.replace(regExp(name), '');
+	            }, this);
+	        },
+	        toggle: function toggle(name) {
+	            return this.contains(name) ? (this.remove(name), false) : (this.add(name), true);
+	        },
+	        contains: function contains(name) {
+	            return regExp(name).test(this.element.className);
+	        },
+	        // bonus..
+	        replace: function replace(oldName, newName) {
+	            this.remove(oldName), this.add(newName);
+	        }
+	    };
+
+	    // IE8/9, Safari
+	    if (!('classList' in Element.prototype)) {
+	        Object.defineProperty(Element.prototype, 'classList', {
+	            get: function get() {
+	                return new ClassList(this);
+	            }
+	        });
+	    }
+
+	    // replace() support for others
+	    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
+	        DOMTokenList.prototype.replace = ClassList.prototype.replace;
+	    }
+	})();
 
 /***/ }
 /******/ ])
