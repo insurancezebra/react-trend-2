@@ -166,9 +166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-	    _this.state = {
-	      currentClass: 'animate'
-	    };
+	    _this.state = { currentClass: 'animate' };
 
 	    // Generate a random ID. This is important for distinguishing between
 	    // Trend components on a page, so that they can have different keyframe
@@ -231,9 +229,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextState) {
-	    // if(nextState.currentClass !== this.currentClass){
 	    this.autoDraw();
-	    // }
 	  };
 
 	  Trend.prototype.getDelegatedProps = function getDelegatedProps() {
@@ -251,7 +247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 114
+	          lineNumber: 110
 	        },
 	        __self: this
 	      },
@@ -265,7 +261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 115
+	            lineNumber: 111
 	          },
 	          __self: this
 	        },
@@ -283,7 +279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 123
+	              lineNumber: 119
 	            },
 	            __self: _this3
 	          });
@@ -349,7 +345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 190
+	          lineNumber: 186
 	        },
 	        __self: this
 	      }),
@@ -365,7 +361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 198
+	          lineNumber: 194
 	        },
 	        __self: this
 	      })
