@@ -1,4 +1,7 @@
-require('../../helpers/classList.helpers.js');
+
+if (window) {
+  require('../../helpers/classList.helpers.js');
+}
 import React, { Component, PropTypes } from 'react';
 import { omit } from '../../utils';
 import {

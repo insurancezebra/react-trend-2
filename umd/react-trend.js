@@ -133,7 +133,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(10);
+	if (window) {
+	  __webpack_require__(10);
+	}
 
 
 	var propTypes = {
@@ -249,7 +251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 113
+	          lineNumber: 116
 	        },
 	        __self: this
 	      },
@@ -263,7 +265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 114
+	            lineNumber: 117
 	          },
 	          __self: this
 	        },
@@ -281,7 +283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 122
+	              lineNumber: 125
 	            },
 	            __self: _this2
 	          });
@@ -348,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 190
+	          lineNumber: 193
 	        },
 	        __self: this
 	      }),
@@ -364,7 +366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 198
+	          lineNumber: 201
 	        },
 	        __self: this
 	      })
@@ -748,13 +750,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    // IE8/9, Safari
-	    // if (!('classList' in Element.prototype)) {
-	    //     Object.defineProperty(Element.prototype, 'classList', {
-	    //         get: function() {
-	    //             return new ClassList(this);
-	    //         }
-	    //     });
-	    // }
+	    if (!('classList' in Element.prototype)) {
+	        Object.defineProperty(Element.prototype, 'classList', {
+	            get: function get() {
+	                return new ClassList(this);
+	            }
+	        });
+	    }
 
 	    // replace() support for others
 	    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
