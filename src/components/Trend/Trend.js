@@ -53,7 +53,7 @@ class Trend extends Component {
 
   componentDidMount() {
     const path = document.querySelector('.trend-line path');
-    path.className = path.className.replace(/\banimate\b/,'');
+    path.setAttribute('class', 'trend-line');
     this.autoDraw();
   }
 
@@ -63,13 +63,13 @@ class Trend extends Component {
     const { autoDraw, autoDrawDuration, autoDrawEasing } = this.props;
 
     const path = document.querySelector('.trend-line path');
-    path.className = 'animate';
+    path.setAttribute('class', 'trend-line animate');
     // remove animate class after animation duration
     // so it will re-trigger itself each time
     if (!first) {
       if (path.className.indexOf('animate') > 0) {
         window.setTimeout(() => {
-          path.className = path.className.replace(/\banimate\b/,'');
+          path.setAttribute('class', 'trend-line');
         }, autoDrawDuration);
       }
     }

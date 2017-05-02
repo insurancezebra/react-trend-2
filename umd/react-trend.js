@@ -177,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Trend.prototype.componentDidMount = function componentDidMount() {
 	    var path = document.querySelector('.trend-line path');
-	    path.className = path.className.replace(/\banimate\b/, '');
+	    path.setAttribute('class', 'trend-line');
 	    this.autoDraw();
 	  };
 
@@ -193,13 +193,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	    var path = document.querySelector('.trend-line path');
-	    path.className = 'animate';
+	    path.setAttribute('class', 'trend-line animate');
 	    // remove animate class after animation duration
 	    // so it will re-trigger itself each time
 	    if (!first) {
 	      if (path.className.indexOf('animate') > 0) {
 	        window.setTimeout(function () {
-	          path.className = path.className.replace(/\banimate\b/, '');
+	          path.setAttribute('class', 'trend-line');
 	        }, autoDrawDuration);
 	      }
 	    }
