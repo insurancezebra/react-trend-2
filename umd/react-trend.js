@@ -228,7 +228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 
-	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextState) {
+	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
 	    this.autoDraw();
 	  };
 
