@@ -193,8 +193,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        autoDrawDuration = _props.autoDrawDuration,
 	        autoDrawEasing = _props.autoDrawEasing;
 
-	    // const path = document.querySelector('.trend-line path');
-	    // path.classList.add('animate');
 	    // // remove animate class after animation duration
 	    // so it will re-trigger itself each time
 
@@ -247,7 +245,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 110
+	          lineNumber: 108
 	        },
 	        __self: this
 	      },
@@ -261,7 +259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 111
+	            lineNumber: 109
 	          },
 	          __self: this
 	        },
@@ -279,7 +277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 119
+	              lineNumber: 117
 	            },
 	            __self: _this3
 	          });
@@ -345,7 +343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 186
+	          lineNumber: 184
 	        },
 	        __self: this
 	      }),
@@ -361,7 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 194
+	          lineNumber: 192
 	        },
 	        __self: this
 	      })
