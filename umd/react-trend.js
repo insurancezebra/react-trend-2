@@ -166,7 +166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-	    _this.state = { currentClass: 'animate' };
+	    _this.state = { currentClass: 'animate', data: [] };
 
 	    // Generate a random ID. This is important for distinguishing between
 	    // Trend components on a page, so that they can have different keyframe
@@ -227,13 +227,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	    this.autoDraw();
-	  };
-
-	  Trend.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-	    console.log('next props', nextProps);
-	    console.log('nextState', nextState);
-	    console.log('this state', this.state);
+	    if (nextProps.data !== this.state.data) {
+	      this.setState({ data: nextProps.data });
+	      this.autoDraw();
+	    }
 	  };
 
 	  Trend.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -255,7 +252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 118
+	          lineNumber: 115
 	        },
 	        __self: this
 	      },
@@ -269,7 +266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 119
+	            lineNumber: 116
 	          },
 	          __self: this
 	        },
@@ -287,7 +284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 127
+	              lineNumber: 124
 	            },
 	            __self: _this3
 	          });
@@ -353,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 194
+	          lineNumber: 191
 	        },
 	        __self: this
 	      }),
@@ -369,7 +366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 202
+	          lineNumber: 199
 	        },
 	        __self: this
 	      })
