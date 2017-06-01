@@ -64,7 +64,7 @@ class Trend extends Component {
     // // remove animate class after animation duration
     // so it will re-trigger itself each time
     this.setState({ currentClass: 'animate' })
-        this.timeout = window.setTimeout(() => {
+        window.setTimeout(() => {
           this.setState({ currentClass: '' });
         }, autoDrawDuration);
 

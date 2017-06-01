@@ -197,7 +197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // so it will re-trigger itself each time
 
 	    this.setState({ currentClass: 'animate' });
-	    this.timeout = window.setTimeout(function () {
+	    window.setTimeout(function () {
 	      _this2.setState({ currentClass: '' });
 	    }, autoDrawDuration);
 
