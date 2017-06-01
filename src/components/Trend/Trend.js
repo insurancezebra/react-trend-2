@@ -93,7 +93,8 @@ class Trend extends Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps);
     this.autoDraw();
   }
 
