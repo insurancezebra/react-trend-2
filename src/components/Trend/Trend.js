@@ -94,8 +94,13 @@ class Trend extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('next props', nextProps)
     this.autoDraw();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('next props', nextProps)
+    console.log('nextState', nextState);
+    console.log('this state', this.state);
   }
 
   componentWillUnmount() {
