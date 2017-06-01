@@ -197,7 +197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // so it will re-trigger itself each time
 
 	    this.setState({ currentClass: 'animate' });
-	    window.setTimeout(function () {
+	    this.timeout = window.setTimeout(function () {
 	      _this2.setState({ currentClass: '' });
 	    }, autoDrawDuration);
 
@@ -226,8 +226,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 
-	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
+	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	    this.autoDraw();
+	  };
+
+	  Trend.prototype.componentWillUnmount = function componentWillUnmount() {
+	    window.clearTimeout(this.timeout);
 	  };
 
 	  Trend.prototype.getDelegatedProps = function getDelegatedProps() {
@@ -245,7 +249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 108
+	          lineNumber: 112
 	        },
 	        __self: this
 	      },
@@ -259,7 +263,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 109
+	            lineNumber: 113
 	          },
 	          __self: this
 	        },
@@ -277,7 +281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 117
+	              lineNumber: 121
 	            },
 	            __self: _this3
 	          });
@@ -343,7 +347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 184
+	          lineNumber: 188
 	        },
 	        __self: this
 	      }),
@@ -359,7 +363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 192
+	          lineNumber: 196
 	        },
 	        __self: this
 	      })
