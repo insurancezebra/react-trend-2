@@ -100,10 +100,6 @@ class Trend extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.clearTimeout(this.timeout);
-  }
-
   getDelegatedProps() {
     return omit(this.props, Object.keys(propTypes));
   }
