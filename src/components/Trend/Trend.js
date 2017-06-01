@@ -95,7 +95,7 @@ class Trend extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps);
-    this.autoDraw();
+    // this.autoDraw();
   }
 
   getDelegatedProps() {
