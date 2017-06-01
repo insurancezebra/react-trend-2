@@ -42,7 +42,7 @@ const defaultProps = {
 class Trend extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentClass: 'animate' };
+    this.state = { currentClass: 'animate', data: [] };
 
     // Generate a random ID. This is important for distinguishing between
     // Trend components on a page, so that they can have different keyframe
@@ -93,8 +93,11 @@ class Trend extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-    this.autoDraw();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.state.data) {
+      this.setState({ data: nextProps.data });
+      this.autoDraw();
+    }
   }
 
   getDelegatedProps() {
