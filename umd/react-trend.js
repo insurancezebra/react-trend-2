@@ -227,6 +227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Trend.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    console.log('next props', nextProps);
 	    this.autoDraw();
 	  };
 
@@ -249,7 +250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 112
+	          lineNumber: 113
 	        },
 	        __self: this
 	      },
@@ -263,7 +264,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          y2: '100%',
 	          __source: {
 	            fileName: _jsxFileName,
-	            lineNumber: 113
+	            lineNumber: 114
 	          },
 	          __self: this
 	        },
@@ -281,7 +282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            stopColor: c,
 	            __source: {
 	              fileName: _jsxFileName,
-	              lineNumber: 121
+	              lineNumber: 122
 	            },
 	            __self: _this3
 	          });
@@ -347,7 +348,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, this.getDelegatedProps(), {
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 188
+	          lineNumber: 189
 	        },
 	        __self: this
 	      }),
@@ -363,7 +364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stroke: gradient ? 'url(#' + this.gradientId + ')' : undefined,
 	        __source: {
 	          fileName: _jsxFileName,
-	          lineNumber: 196
+	          lineNumber: 197
 	        },
 	        __self: this
 	      })

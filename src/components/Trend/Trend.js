@@ -94,6 +94,7 @@ class Trend extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('next props', nextProps)
     this.autoDraw();
   }
 
